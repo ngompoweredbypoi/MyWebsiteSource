@@ -182,37 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add click event
     langBtn.addEventListener('click', toggleLanguage);
-
-    // Theme: prefers-color-scheme aware + toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const storedTheme = localStorage.getItem('site-theme');
-
-    function applyTheme(isDark) {
-        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        if (themeToggle) {
-            themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        }
-    }
-
-    function initTheme() {
-        if (storedTheme) {
-            applyTheme(storedTheme === 'dark');
-            return;
-        }
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        applyTheme(prefersDark);
-    }
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            const isCurrentlyDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            const next = !isCurrentlyDark;
-            applyTheme(next);
-            localStorage.setItem('site-theme', next ? 'dark' : 'light');
-        });
-    }
-
-    initTheme();
 });
 
 // Add RTL CSS adjustments
